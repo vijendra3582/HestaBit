@@ -1,0 +1,1 @@
+[01-Apr-2020 04:50:39 UTC] PHP Fatal error:  Allowed memory size of 134217728 bytes exhausted (tried to allocate 262144 bytes) in /home/dy7fah0sphz2/public_html/vijen/app/Http/Controllers/Controller.php on line 47

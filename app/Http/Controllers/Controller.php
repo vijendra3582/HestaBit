@@ -20,7 +20,7 @@ class Controller extends BaseController
             $name['title'][] = "cat".$i;
         }
         
-        foreach($name['title'] as $value){
+        foreach(array_unique(array_filter($name['title'])) as $value){
             $categories['title'][] = [
                         "name" => $value
                       ];

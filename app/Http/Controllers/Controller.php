@@ -15,21 +15,31 @@ class Controller extends BaseController
     public function bulkUpload(){
         $categories = [];
         $title = [];
-        
+        $name = [];
         for($i = 1; $i <= 20000; $i++){
-            $name[] = [
-                        "name" => "cat".$i
+            $name['title'][] = "cat".$i;
+        }
+        
+        foreach($name['title'] as $value){
+            $categories['title'][] = [
+                        "name" => $value
                       ];
         }
-        $categories['title'] = $name;
         
         echo "<hr><pre>";
-        print_r($categories);
-        
+        print_r($name);
+        // die;
         $categories = collect($categories['title']);
         foreach ($categories->chunk(1000) as $categoriesChunk)
         {
-            DB::table('categories')->insertOrIgnore(array_filter($categoriesChunk->toArray()));
+            $insertArray = [];
+            foreach($categoriesChunk as $item){
+                 if($item['name'] == "" || empty(trim($item['name']))){
+                     continue;
+                 }
+                 $insertArray[] = $item;
+            }
+            DB::table('categories')->insertOrIgnore($insertArray);
         }
         
     }
